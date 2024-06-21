@@ -17,7 +17,7 @@ body {
 
 header {
     width: 100%;
-    background-color: #007bff;
+    background-color: #FF5A00;
     color: white;
     text-align: center;
     padding: 15px 0;
@@ -60,7 +60,7 @@ header h1 {
 #add-todo {
     padding: 10px 15px;
     border: none;
-    background-color: #007bff;
+    background-color: #FF5A00;
     color: white;
     cursor: pointer;
     border-radius: 0 5px 5px 0;
@@ -68,7 +68,7 @@ header h1 {
 }
 
 #add-todo:hover {
-    background-color: #0056b3;
+    background-color: #FF5A00;
 }
 
 #todo-list {
