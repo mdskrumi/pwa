@@ -1,16 +1,25 @@
-let todos = [];
+console.log("App is running");
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./sw.js");
+}
 
 const newTodoInput = document.getElementById("new-todo");
 const addTodoButton = document.getElementById("add-todo");
 const todoList = document.getElementById("todo-list");
 
-addTodoButton.addEventListener("click", addTodo);
+let todos = JSON.parse(localStorage.getItem("todos")) || [];
+
+function saveTodos() {
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
 
 function addTodo() {
   const newTodoText = newTodoInput.value.trim();
   if (newTodoText) {
     todos.push({ text: newTodoText, completed: false });
     newTodoInput.value = "";
+    saveTodos();
     renderTodos();
   }
 }
@@ -51,13 +60,16 @@ function editTodoText(index) {
   const newTodoText = prompt("Edit the to-do:", todos[index].text);
   if (newTodoText) {
     todos[index].text = newTodoText.trim();
+    saveTodos();
     renderTodos();
   }
 }
 
 function deleteTodo(index) {
   todos.splice(index, 1);
+  saveTodos();
   renderTodos();
 }
 
 renderTodos();
+addTodoButton.addEventListener("click", addTodo);
