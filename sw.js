@@ -1,4 +1,4 @@
-const assets = ["/", "style.css", "app.js"];
+const assets = ["/", "app.js"];
 
 self.addEventListener("install", (event) => {
   console.log("SW install complete");
@@ -21,10 +21,10 @@ self.addEventListener("activate", () => {
 //       return (
 //         cachedResponse ||
 //         fetch(event.request).then((networkResponse) => {
-//           caches.open("assets").then((cache) => {
-//             cache.put(event.request, networkResponse.clone());
+//           return caches.open("assets").then((cache) => {
+//             cache.put(event.request.url, networkResponse.clone());
+//             return networkResponse;
 //           });
-//           return networkResponse;
 //         })
 //       );
 //     })
@@ -36,10 +36,10 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(
     fetch(event.request)
       .then((networkResponse) => {
-        caches.open("assets").then((cache) => {
-          cache.put(event.request, networkResponse.clone());
+        return caches.open("assets").then((cache) => {
+          cache.put(event.request.url, networkResponse.clone());
+          return networkResponse;
         });
-        return networkResponse;
       })
       .catch(() => {
         return caches.match(event.request).then((cachedResponse) => {
