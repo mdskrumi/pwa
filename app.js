@@ -1,9 +1,3 @@
-console.log("App is running");
-
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./sw.js");
-}
-
 const newTodoInput = document.getElementById("new-todo");
 const addTodoButton = document.getElementById("add-todo");
 const todoList = document.getElementById("todo-list");
